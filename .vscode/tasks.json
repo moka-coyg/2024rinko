@@ -1,0 +1,64 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "convert a image file into the eps format",
+      "type": "shell",
+      "command": "[[ ${input:image_file} == *.pdf ]] && pdftops -eps ${input:image_file} || convert ${input:image_file} eps2:$(echo ${input:image_file} | sed 's/\\(.*\\)\\..*/\\1.eps/')",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "delete Zone.Identifier",
+      "type": "shell",
+      "command": "find . -name '*:Zone.Identifier' -type f -delete",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "convert from SJIS into UTF-8",
+      "type": "shell",
+      "command": "mkdir -p template_origin && mv ${input:text_file} template_origin/$(basename ${input:text_file}) && iconv -f SJIS-win template_origin/$(basename ${input:text_file}) > ${input:text_file}",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "image_file",
+      "type": "command",
+      "command": "shellCommand.execute",
+      "args": {
+        "command": "find fig -type f \\( -name \"*.pdf\" -o -name \"*.svg\" -o -name \"*.jpeg\" -o -name \"*.png\" \\)",
+          "cwd": "${workspaceFolder}",
+          "env": {
+              "WORKSPACE": "${workspaceFolder[0]}",
+              "FILE": "${file}",
+              "PROJECT": "${workspaceFolderBasename}"
+          }
+      }, 
+    },
+    {
+      "id": "text_file",
+      "type": "command",
+      "command": "shellCommand.execute",
+      "args": {
+        "command": "find . -maxdepth 1 -type f \\( -name \"*.tex\" -o -name \"*.cls\" \\)",
+          "cwd": "${workspaceFolder}",
+          "env": {
+              "WORKSPACE": "${workspaceFolder[0]}",
+              "FILE": "${file}",
+              "PROJECT": "${workspaceFolderBasename}"
+          }
+      }, 
+    }
+  ]
+}
