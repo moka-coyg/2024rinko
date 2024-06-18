@@ -1,9 +1,6 @@
-\documentclass[twocolumn]{jarticle}
+\documentclass{jarticle}
 % 図をFig. に変えておく
 \renewcommand{\figurename}{Fig.}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 以下必要に応じて執筆先にコピペ
 
 % 画像
 \usepackage[dvipdfmx]{graphicx}
@@ -18,177 +15,273 @@
 \usepackage{amsmath, amssymb}
 \usepackage{mathrsfs}	% for \mathscr{}
 \usepackage{bm}
-% 図や表の引用
-\newcommand{\figref}[1]{Fig.\,\ref{#1}}
-\newcommand{\Figref}[1]{Figure\,\ref{#1}}
-\newcommand{\figsref}[2]{Figs.\,\ref{#1} -- \ref{#2}}
-\newcommand{\Figsref}[2]{Figures\,\ref{#1} -- \ref{#2}}
-\newcommand{\tabref}[1]{Table\,\ref{#1}}
-% 数式記号
-\newcommand{\tp}{\mathsf{T}}	% tp: transpose
-\newcommand{\sgn}{\operatorname{sgn}}
-\newcommand{\argmin}{\mathop{\rm arg~min}\limits}
-% Theorem 関連
-% 日本語
-\usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{定義}
-\newtheorem{theorem}[definition]{定理}
-\newtheorem{proposition}[definition]{命題}
-\newtheorem{remark}[definition]{注意}
-\renewcommand\proofname{\bf 証明}
-% % English
-% \newtheorem{definition}{Definition}
-% \newtheorem{theorem}[definition]{Theorem}
-% \newtheorem{lemma}[definition]{Lemma}
-% \newtheorem{corollary}[definition]{Corollary}
-% \newtheorem{proposition}[definition]{Proposition}
-% \newtheorem{remark}[definition]{Remark}
-% \newtheorem{example}[definition]{Example}
+% ソースコード表示のための設定
+\usepackage{listings,jlisting}
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex
+}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 余白の設定
+\usepackage[margin=20truemm]{geometry}
 
 \begin{document}
-\title{日本語 \LaTeX をVisual Studio Code で書く}
-\author{木村 駿介}
+\title{1年生実習 第1週}
+\author{B5研究室}
+\date{2024年6月19日}
 \maketitle
 
-\section{環境構築}
+\section{実習概要}
 
-Windows の場合は WSL をインストールする．
-以下のページに記載してあるとおりです．
+これから5週間にわたり，実習を行います．各週の実習内容は以下の通りです．
 
-\url{https://github.com/kimushun1101/platex-vscode-template?tab=readme-ov-file#wsl-windows-subsystem-for-linux}
+\begin{description}
+  \item[第1週-第3週] Python入門
+  \item[第4週] Leap Motionを用いて手書き文字を取得
+  \item[第5週] 機械学習による手書き文字の分類
+\end{description}
 
-\section{使い方}
-論文を提出する学会などが配布しているTeX ファイルやそのスタイルファイルをこのディレクトリにコピペして，同様にビルドしてください．
-私は「学会名.tex」に名前を変えて作成しています．
+実行環境はGoogle Colaboratoryを使用することを想定しています．他の環境でももちろん大丈夫です．
 
-コピペ用のサンプルとしていくつか書き方をメモしておく．
-追加して欲しい記述がありましたらお知らせください．
+\section{Python入門}
+\subsection{入出力}
 
-\section{図の挿入，定義定理}
-\begin{figure}[tb] % 画像の位置はtop かbottom
-  \begin{center}
-      \includegraphics[width=0.8\linewidth]{fig/robot.png}
-  \end{center}
-  \caption{Model of a two-wheeled mobile robot\label{fig:two_wheeled_mobile_robot}}
-\end{figure}
+Pythonで入出力を行うには，\texttt{input()}関数と\texttt{print()}関数を用います．
+プログラムの例をソースコード\ref{std_in_out}に示します．
+\begin{lstlisting}[caption=入出力,label=std_in_out]
+# 標準入力
+name = input("名前を入力してください: ")
 
+# 標準出力
+print("こんにちは，" + name + "さん")
 
-\begin{definition}[2 輪車両システム]
-  \label{def:system}
-  2 輪車両型移動ロボット \figref{fig:two_wheeled_mobile_robot} を考える．
-  このとき，以下のシステムを2 輪車両システムと呼ぶ．
+# ほかの書き方
+print("こんにちは，{}さん".format(name))
+print(f"こんにちは，{name}さん")
+\end{lstlisting}
 
-  \begin{align}
-    \left[
-      \begin{array}{c}
-      \dot x_1 \\
-      \dot x_2 \\
-      \dot x_3 \\
-      \end{array}
-    \right]
-    =
-    \left[
-      \begin{array}{cc}
-      \cos x_3 & 0\\
-      \sin x_3 & 0\\
-      0 & 1 \\
-      \end{array}
-    \right]
-    \left[
-    \begin{array}{cc}
-    u_1 \\
-    u_2
-    \end{array}
-    \right]
-    \label{system:two_wheeled_mobile_robot}
-  \end{align}
-\end{definition}
+input文で文字列を入力した場合，その文字列は文字列型として扱われます．数字を入力したい場合は，\texttt{int()}関数や\texttt{float()}関数を用いて数値型に変換する必要があります．(ソースコード\ref{input_number})
+\begin{lstlisting}[caption=数値の入力,label=input_number]
+  # 数値の入力
+  price = input("価格を入力してください: ")
+  print(type(price))  # <class 'str'> <- これは文字列型
 
-\begin{theorem}[制御則]
-  \label{theo:controller}
-  2 輪車両システムを座標・入力変換したシステムに対する制御則は
-  \begin{align}
-    \left[
-      \begin{array}{c}
-        v_1 \\
-        v_2
-      \end{array}
-    \right]
-    = 
-    \left[
-    \begin{array}{c}
-      - \left| p(\xi) g_1(\xi) \right|^{\tilde s/ 3} \sgn \left( p(\xi) g_1(\xi) \right) \\
-      - \left| p(\xi) g_2(\xi) \right|^{\tilde s/ 3} \sgn \left( p(\xi) g_2(\xi) \right)
-    \end{array}
-    \right]
-    \label{eq:controller}
-  \end{align}
-  で得られる．
-\end{theorem}
+  price_include_tax = price * 1.1 # エラー
 
-\begin{proof}
-  参考文献\cite{kimura2022} を参照．
-\end{proof}
+  # 数値型に変換
+  price = int(price)
+  print(type(price))  # <class 'int'> <- これは数値型
 
-\section{数式の微調整}
-\begin{proposition}
-  \label{prop:arrangement}
-  行列をゆとりをもって書くには
+  price_include_tax = price * 1.1 # 正しい結果が得られる
+  print("税込み価格は" + int(price_include_tax) + "円です")
+  \end{lstlisting}
 
-  \verb|\renewcommand{\arraystretch}{1以上}| % 改行しないとunderfull hbox のwarning が出る
-  
-  を使用する．
-  \begin{align}
-    \renewcommand{\arraystretch}{1.5}
-    \left[
-      \begin{array}{c}
-      \frac{\partial V_\theta}{\partial \xi_1} \\
-      \frac{\partial V_\theta}{\partial \xi_2} \\
-      \frac{\partial V_\theta}{\partial \xi_3}
-      \end{array}
-    \right]^\tp
-    \renewcommand{\arraystretch}{1} % もとに戻す
-    =&
-    \left[
-      \begin{array}{c}
-        2 |\xi_3|^{3/2} \cos \theta \\
-        2 |\xi_3|^{3/2} \sin \theta \\
-        2 \sgn \xi_3
-      \end{array}
-    \right]^\tp \label{eq:dV_thetadx}
-  \end{align}
-  場合分けを行う場合の書き方は以下の通り．
-  \begin{align}
-    p(\xi) =
-    \left\{
-      \begin{array}{lcl}
-      \vspace*{ 2mm }
-      \frac{\partial V_\theta}{\partial \xi}(\xi, \theta) & : & \text{$\xi_1 = \xi_2 = 0$ のとき} \\
-      \frac{\partial V}{\partial \xi}(\xi) & : & \text{それ以外}
-      \end{array}
-    \right.
-    \label{eq:discontinuous_function_p}
-  \end{align}
-\end{proposition}
+\subsection{四則演算}
+Pythonで四則演算を行うには，ソースコード\ref{calculation}のように記述します．
+\begin{lstlisting}[caption=四則演算,label=calculation]
+  a = 10
+  b = 3
+  print(a + b)  # 足し算
+  print(a - b)  # 引き算
+  print(a * b)  # 掛け算
+  print(a / b)  # 割り算
+  print(a // b) # 割り算(整数部のみ)
+  print(a % b)  # 割り算(余り)
+  print(a ** b) # べき乗
+  print(abs(a)) # 絶対値
+\end{lstlisting}
 
-\begin{remark}
-  定義，定理，命題，注意などには通番号が付けされる．
-  通し番号としたくない場合には
+\subsection{分岐処理}
+変数の値によって処理を分岐させる場合は，\texttt{if}文を用います．ソースコード\ref{if}に例を示します．
+\begin{lstlisting}[caption=if文,label=if]
+  age = int(input("数字を入力してください: "))
+  if a > 0:
+    print("aは正の数です")
+  elif a == 0:
+    print("aは0です")
+  else:
+    print("aは負の数です")
+\end{lstlisting}
 
-  \verb|\newtheorem{theorem}[definition]{定理}| % 改行しないとunderfull hbox のwarning が出る
+\texttt{if}文は，条件分岐を行うための文です．\texttt{if}文の条件が真の場合，その処理を実行します．\texttt{else}文は，\texttt{if}文の条件が偽の場合に実行される処理を記述します．\texttt{else}文は，\texttt{if}文の後に記述します．
+\texttt{elif}文は，\texttt{if}文と\texttt{else}文の間に挟まれる条件分岐文です．\texttt{elif}文は，複数の条件を順番に評価し，最初に真となった条件の処理を実行します．\texttt{elif}文は，\texttt{if}文の条件が偽で，かつ自身の条件が真の場合に処理を実行します．
 
-  などの\verb|[definition]| を削除する．
-\end{remark}
+\texttt{if}文の条件式には，比較演算子や論理演算子を用いることができます．
+比較演算子とは，2つの値を比較するための演算子です．例えば，\texttt{a > b}は，\texttt{a}が\texttt{b}より大きい場合に\texttt{True}を返します．論理演算子とは，複数の条件を組み合わせるための演算子です．例えば，\texttt{a > 0 and a < 10}は，\texttt{a}が0より大きくかつ10より小さい場合に\texttt{True}を返します．以下に比較演算子と論理演算子の一覧を示します．
 
-\section{ハイパーリンク}
-たとえば，定理\ref{theo:controller} をクリックするとそこにジャンプできる．
-前ページにある数式や図，参考文献の番号も同様．
-参考文献をもう1 つ出してみる\cite{kimura2020}．
+\begin{itemize}
+  \item 比較演算子:
+  \begin{itemize}
+    \item \texttt{==} : 等しい
+    \item \texttt{!=} : 等しくない
+    \item \texttt{>} : より大きい
+    \item \texttt{<} : より小さい
+    \item \texttt{>=} : 以上
+    \item \texttt{<=} : 以下
+  \end{itemize}
+  \item 論理演算子:
+  \begin{itemize}
+    \item \texttt{and} : 論理積 (両方の条件が真の場合に真)
+    \item \texttt{or} : 論理和 (どちらかの条件が真の場合に真)
+    \item \texttt{not} : 否定 (条件の真偽を反転)
+  \end{itemize}
+\end{itemize}
 
-\bibliographystyle{junsrt}
-\bibliography{reference} % reference.bib を読み込む
-% \nocite{*} % 引用がされていないものも表示する
+\subsection{ループ処理}
+繰り返して処理を行う場合は，\texttt{for}文や\texttt{while}文を用います．
+\texttt{for}文は，リストやタプルなどの要素を1つずつ取り出して処理を行う場合に使用します．
+\texttt{while}文は，条件が真の間，処理を繰り返す場合に使用します．ソースコード\ref{loop}に例を示します．
+\begin{lstlisting}[caption=ループ処理,label=loop]
+  # for文
+  for i in range(5):
+    print(i)
+
+  # while文
+  i = 0
+  while i < 5:
+    print(i)
+    i += 1 # i = i + 1と同じ
+\end{lstlisting}
+
+range関数は，指定した範囲の整数を生成する関数です．range関数は，for文において，繰り返し回数を指定する際によく使用されます．range関数の使い方を以下に示します．
+\begin{itemize}
+  \item \texttt{range(n)} : 0からn-1までの整数を生成
+  \item \texttt{range(a, b)} : aからb-1までの整数を生成
+  \item \texttt{range(a, b, c)} : aからb-1までの整数をc刻みで生成
+\end{itemize}
+
+また，\texttt{break}文や\texttt{continue}文を用いることで，ループ処理を制御することができます．
+\texttt{break}文は，ループ処理を中断し，ループから抜け出す場合に使用します．
+\texttt{continue}文は，ループ処理を中断し，次の繰り返しに移る場合に使用します．
+ソースコード\ref{break_continue}に例を示します．
+\begin{lstlisting}[caption=break文とcontinue文,label=break_continue]
+  while(True): # 無限ループ
+    number = int(input("数字を入力してください: "))
+    if number == 0:
+      continue # 0のときは処理をスキップ
+    if number < 0:
+      break # 負の数のときはループを抜ける
+    print(number)
+\end{lstlisting}
+
+無限ループは，ソースコード\ref{break_continue}のように，\texttt{while(True):}で表現することができます．
+
+\subsection{リストとタプル}
+リストとタプルとは，複数の要素をまとめて扱うためのデータ構造です．
+リストは，\texttt{[]}で囲まれた要素の集まりであり，要素の追加や削除が可能です．
+タプルは，\texttt{()}で囲まれた要素の集まりであり，要素の追加や削除ができません．
+同様の考え方として，C言語における配列があります．c言語における配列は，要素数が固定されており，要素の追加や削除ができません．一方，リストとタプルは要素数が可変であるという特徴があります．
+ソースコード\ref{list_tuple}に例を示します．
+\begin{lstlisting}[caption=リストとタプル,label=list_tuple]
+  # リスト
+  fruits = ["apple", "banana", "orange"]
+  print(fruits[0]) # apple
+  fruits.append("grape") # 要素の追加
+  print(fruits) # ["apple", "banana", "orange", "grape"]
+
+  # タプル
+  fruits = ("apple", "banana", "orange")
+  print(fruits[0]) # apple
+  fruits.append("grape") # エラー
+\end{lstlisting}
+
+リストに要素を追加するには，\texttt{append()}メソッドを用います．同様に，削除をするには，\texttt{remove()}メソッドを用います．リストの操作として重要なものにスライスがあります．スライスとは，リストやタプルから一部の要素を取り出す操作です．他にも，挿入など，リストに対して様々な操作が可能です．ソースコード\ref{list_example}に例を示します．
+\begin{lstlisting}[caption=リストの操作,label=list_example]
+  fruits = ["apple", "banana", "orange"]
+  fruits.insert(1, "grape") # 1番目に挿入
+  print(fruits) # ["apple", "grape", "banana", "orange"]
+
+  fruits.remove("banana") # bananaを削除
+  print(fruits) # ["apple", "grape", "orange"]
+
+  print(fruits[1:]) # ["grape", "orange"] # 1番目以降の要素を取得(スライス)
+\end{lstlisting}
+
+リストとfor文を組み合わせることで，リストの要素を1つずつ取り出して処理を行うことができます．ソースコード\ref{list_for}に例を示します．
+\begin{lstlisting}[caption=リストとfor文,label=list_for]
+  fruits = ["apple", "banana", "orange"]
+  for fruit in fruits:
+    print(fruit) # apple, banana, orangeが順に表示される
+\end{lstlisting}
+
+\section{演習}
+\begin{enumerate}
+  \item 実行すると，Hello, World!と表示するプログラムを作成してください．
+  \item 12345+23456を計算して結果を表示するプログラムを作成してください．
+  \item 12345を7で割った余りを表示するプログラムを作成してください．
+  \item 整数値を入力し，その入力値を表示するプログラムを作成してください．
+  \item 整数値を入力し，その入力値を3倍した計算結果を表示するプログラムを作成してください．
+  \item 整数値を2つ入力し，それらの値の和，差，積，商と余りを求めるプログラムを作成してください．
+  \item 整数値を入力し，値が0ならzeroと表示するプログラムを作成してください．
+  \item 整数値を入力し，値が正ならpositive，負ならnegative，0ならzeroと表示するプログラムを作成してください．
+  \item 整数値を入力し，その値を絶対値にして表示するプログラムを作成してください．ただし，abs()関数を使用しないでください．
+  \item Hello World!を10回繰り返して表示するプログラムを作成してください．
+  \item 整数値を入力し，その値の回数だけHello World!を繰り返して表示するプログラムを作成してください．
+  \item 整数値を入力し，0から入力値まで数を1ずつ増やして表示するプログラムを作成してください．
+  \item 整数値を入力し，入力値から0まで数を1ずつ減らして表示するプログラムを作成してください．
+  \item 整数値を入力し，0から入力値を超えない値まで2ずつ増やして表示するプログラムを作成してください．
+  \item \texttt{teachers = ["Fukumi", "S\_Ito", "M\_Ito"]}というリストを作成し，リストの要素を1つずつ表示するプログラムを作成してください．
+  \item teachersの要素を1つずつ表示するプログラムを作成してください．ただし，要素の表示順を逆にしてください．(ヒント:\texttt{reversed()}関数を使用する)
+  \item teachersに \texttt{"Tokushima"}を追加してください．
+  \item teachersから \texttt{"Tokushima"}を削除してください．
+\end{enumerate}
+
+\section{課題}
+\subsection{FizzBuzz問題}
+プログラミングの入門問題として，FizzBuzz問題がよく用いられます．
+FizzBuzz問題とは，1から100までの数を順に表示するプログラムを作成する問題です．ただし，3の倍数の場合はFizz，5の倍数の場合はBuzz，3の倍数かつ5の倍数の場合はFizzBuzzと表示するプログラムを作成してください．1から30までの出力例を以下に示します．
+\begin{verbatim}
+  1
+  2
+  Fizz
+  4
+  Buzz
+  Fizz
+  7
+  8
+  Fizz
+  Buzz
+  11
+  Fizz
+  13
+  14
+  FizzBuzz
+  16
+  17
+  Fizz
+  19
+  Buzz
+  Fizz
+  22
+  23
+  Fizz
+  Buzz
+  26
+  Fizz
+  28
+  29
+  FizzBuzz
+\end{verbatim}
+
+\subsection{調査課題}
+以下に示すPythonの文や操作の内容について調べてください．調べた内容と，実行した例を報告してください．
+\begin{itemize}
+  \item ディクショナリ
+  \item pass文
+  \item リスト内包表記
+\end{itemize}
 \end{document}
