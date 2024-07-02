@@ -1,11 +1,11 @@
 # Fdb version 3
-["dvipdf"] 1719933030 "out/sample.dvi" "out/sample.pdf" "out/sample" 1719933031
-  "out/sample.dvi" 1719933030 55956 6e0a4ec27b80ff25a15e8377e649c4d3 "latex"
+["dvipdf"] 1719936641 "out/sample.dvi" "out/sample.pdf" "out/sample" 1719936642
+  "out/sample.dvi" 1719936641 56468 4108d7b6bd1ab4be32c5182ec932c7f1 "latex"
   (generated)
   "out/sample.pdf"
-["latex"] 1719933030 "/home/moka/dev/git/2024rinko/week3/sample.tex" "out/sample.dvi" "sample" 1719933031
+["latex"] 1719936640 "/home/moka/dev/git/2024rinko/week3/sample.tex" "out/sample.dvi" "sample" 1719936642
   "/etc/texmf/web2c/texmf.cnf" 1711611973 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/moka/dev/git/2024rinko/week3/sample.tex" 1719933029 27498 c8e6ac90d0ab2f59ec9d30917f3a417a ""
+  "/home/moka/dev/git/2024rinko/week3/sample.tex" 1719936640 27724 e1bbd48b564c3a64a07848fda17c432b ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/ptex-fonts/standard/goth10.tfm" 1463434352 1196 5981e79c37b2cfd27b3612a6783cd4b6 ""
@@ -145,9 +145,9 @@
   "fig/svm_not_linear.png" 1719766243 28774 12b4e61438d0fc4be0c3187d8f5d77d4 ""
   "fig/svm_rbf_db.png" 1719766312 50587 59a6c59320614701c62fcba0066d2509 ""
   "fig/svm_support_margin.png" 1719756307 28206 5a0c4ad84c6e778200b12c8e8adb2187 ""
-  "out/sample.aux" 1719933030 5778 660ef6ca9183dc164a9699fdf9eb2ae9 "latex"
-  "out/sample.out" 1719933030 808 03f20a5d9bd397de7681d38ff86caecb "latex"
-  "sample.tex" 1719933029 27498 c8e6ac90d0ab2f59ec9d30917f3a417a ""
+  "out/sample.aux" 1719936641 5783 0935dbfec968dbb0d694d65ea25d03fb "latex"
+  "out/sample.out" 1719936641 811 cc969cc3c7ab98263fafb5dc760aaefc "latex"
+  "sample.tex" 1719936640 27724 e1bbd48b564c3a64a07848fda17c432b ""
   (generated)
   "out/sample.aux"
   "out/sample.dvi"

@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.3.28)  3 JUL 2024 00:10
+This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.3.28)  3 JUL 2024 01:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -485,38 +485,31 @@ File: fig/svm_rbf_db.png Graphic file (type bmp)
 <fig/svm_rbf_db.png>
 [5]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 220.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 204.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 220.
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 223.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 204.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 207.
 [6] [7] [8]
-Overfull \hbox (17.82027pt too wide) in paragraph at lines 426--434
+Overfull \hbox (17.82027pt too wide) in paragraph at lines 410--418
  [][][] 
  []
 
 
-Overfull \hbox (17.82027pt too wide) in paragraph at lines 443--451
+Overfull \hbox (17.82027pt too wide) in paragraph at lines 427--435
  [][][] 
  []
 
-[9]
-
-LaTeX Warning: Reference `eq:euqlid' on page 10 undefined on input line 477.
-
-[10] [11] (out/sample.aux)
-
-LaTeX Warning: There were undefined references.
-
+[9] [10] [11] (out/sample.aux)
 Package rerunfilecheck Info: File `sample.out' has not changed.
-(rerunfilecheck)             Checksum: 03F20A5D9BD397DE7681D38FF86CAECB;808.
+(rerunfilecheck)             Checksum: CC969CC3C7AB98263FAFB5DC760AAEFC;811.
  ) 
 Here is how much of TeX's memory you used:
- 12984 strings out of 478741
- 196115 string characters out of 5860982
- 639200 words of memory out of 5000000
- 31186 multiletter control sequences out of 15000+600000
+ 12983 strings out of 478741
+ 196104 string characters out of 5860982
+ 646201 words of memory out of 5000000
+ 31185 multiletter control sequences out of 15000+600000
  521712 words of font info for 117 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 60i,12n,70p,275b,1955s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,12n,70p,288b,1309s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on out/sample.dvi (11 pages, 55956 bytes).
+Output written on out/sample.dvi (11 pages, 56468 bytes).
