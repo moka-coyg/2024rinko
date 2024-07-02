@@ -2,4 +2,10 @@
 \BOOKMARK [1][-]{section.1}{SVM\(サポートベクターマシン\)}{}% 1
 \BOOKMARK [1][-]{section.2}{機械学習によるデータ分類}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{データの準備}{section.2}% 3
-\BOOKMARK [1][-]{section.3}{課題}{}% 4
+\BOOKMARK [2][-]{subsection.2.2}{データの分割}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{SVMによる分類}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{予測と評価}{section.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.4.1}{混同行列}{subsection.2.4}% 7
+\BOOKMARK [3][-]{subsubsection.2.4.2}{正解率，適合率，再現率，F1スコア}{subsection.2.4}% 8
+\BOOKMARK [1][-]{section.3}{課題}{}% 9
+\BOOKMARK [1][-]{appendix.A}{補足：表のスタイル}{}% 10
